@@ -1,15 +1,15 @@
 import { Outlet } from "react-router";
 import Header from "../components/common/Header";
+import Footer from "../components/common/Footer";
+import Theme from "../components/pages/Home/Theme/Theme";
 
 const Main = () => {
   return (
     <div>
-      <div>
-        <Header />
-      </div>
-      <div>
-        <Outlet />
-      </div>
+      <Header />
+      <Outlet />
+      <Footer />
+      <Theme/>
     </div>
   );
 };

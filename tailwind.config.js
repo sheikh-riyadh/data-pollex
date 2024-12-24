@@ -5,7 +5,9 @@ export default {
     extend: {
       colors: {
         background: "rgba(var(--background))",
+        btn: "rgba(var(--btn))",
         "border-primary": "rgba(var(--border))",
+        "hero-bg":"rgba(var(--hero-bg))",
         card: "rgba(var(--card))",
         input: "rgba(var(--input))",
         primary: "rgba(var(--copy-primary))",
