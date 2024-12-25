@@ -1,7 +1,14 @@
-import { FaAngleDown, FaBars, FaPhoneAlt, FaSchool, FaSearch } from "react-icons/fa";
+import {
+  FaAngleDown,
+  FaBars,
+  FaPhoneAlt,
+  FaSchool,
+  FaSearch,
+} from "react-icons/fa";
 import Button from "./Button";
 import Input from "./Input";
 import { header } from "../../data/header";
+import { Link } from "react-router";
 
 const Header = () => {
   return (
@@ -9,25 +16,25 @@ const Header = () => {
       <nav>
         <div className="flex items-center justify-between gap-5 container xl:hidden">
           <div>
-            <div className="cursor-pointer flex items-center gap-2">
+            <Link to="/" className="cursor-pointer flex items-center gap-2">
               <img className="w-8" src="/logo.svg" alt="" />
               <span className="text-lg text-primary font-bold uppercase">
                 educa
               </span>
-            </div>
+            </Link>
           </div>
           <div>
-            <FaBars className="text-primary text-2xl"/>
+            <FaBars className="text-primary text-2xl" />
           </div>
         </div>
         <div className="grid-cols-12 items-center px-[50px] hidden xl:grid">
           <div className="col-span-4 flex items-center gap-3 w-full">
-            <div className="cursor-pointer flex items-center gap-2">
+            <Link to="/" className="cursor-pointer flex items-center gap-2">
               <img className="w-8" src="/logo.svg" alt="" />
               <span className="text-lg text-primary font-bold uppercase">
                 educa
               </span>
-            </div>
+            </Link>
             <div className="flex items-center bg-background px-4 text-primary rounded-full py-1.5">
               <Input className="bg-transparent p-0" />
               <FaSearch />
