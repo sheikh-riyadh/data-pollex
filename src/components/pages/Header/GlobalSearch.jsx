@@ -23,7 +23,7 @@ const GlobalSearch = ({ isModalOpen, setIsModalOpen, data, isLoading }) => {
     <div className="z-50" ref={modalRef}>
       <div className="flex flex-col items-center justify-center">
         <div
-          className={`bg-white rounded-md border absolute top-10 left-0 w-full`}
+          className={`bg-card rounded-md border border-border-primary absolute top-10 left-0 w-full`}
         >
           {data?.length ? (
             <div className="flex flex-col p-5 gap-5 max-h-[400px] overflow-y-auto custom-bar">
