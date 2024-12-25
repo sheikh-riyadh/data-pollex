@@ -1,7 +1,21 @@
-import person from "../../../../assets/pd-person.jpg";
+import PropTypes from "prop-types";
 import Button from "../../../common/Button";
+import { useState } from "react";
 
-const Courses = () => {
+const Courses = ({ data }) => {
+  const [isExplore, setIsExplore] = useState(false);
+  const value = {
+    first: null,
+    second: null,
+  };
+  if (!isExplore) {
+    value.first = 23;
+    value.second = 29;
+  } else {
+    value.first = 0;
+    value.second = 29;
+  }
+
   return (
     <div className="container py-8 md:py-28 bg-card">
       <div className="">
@@ -9,29 +23,44 @@ const Courses = () => {
           <h1 className="font-bold text-xl xl:text-5xl text-center  uppercase ">
             We provide alot of courses
           </h1>
-          <span className="text-secondary text-xl">Explore a wide range of learning opportunities with us!</span>
+          <span className="text-secondary text-xl">
+            Explore a wide range of learning opportunities with us!
+          </span>
         </div>
 
-        <div className="grid md:grid-cols-2  lg:grid-cols-4 gap-5 ">
-          {[...Array(4).keys()].map((course) => (
+        <div className="grid md:grid-cols-2  lg:grid-cols-3 gap-5 ">
+          {data?.hero?.slice(value?.first, value.second)?.map((course) => (
             <div
-              key={course}
+              key={course?.courseName}
               className="bg-background p-3 rounded-md border border-border-primary"
             >
-              <img className="rounded-md w-full h-52" src={person} alt="course" />
+              <img
+                className="rounded-md w-full h-52"
+                src={course?.image}
+                alt="course"
+              />
               <div className="text-primary py-3">
-                <h2 className="font-medium text-xl">Basic Marketing</h2>
-                <p className="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem, rerum provident! Commodi rem at quia veritatis sed distinctio reiciendis doloribus?</p>
+                <h2 className="font-medium text-xl">{course?.courseName}</h2>
+                <p className="text-secondary">{course?.description}</p>
               </div>
             </div>
           ))}
         </div>
         <div className="flex flex-col items-center justify-center pt-8 md:pt-16">
-          <Button className="w-40">Explore More</Button>
+          <Button
+            onClick={() => setIsExplore((prev) => !prev)}
+            className="w-40"
+          >
+            Explore More
+          </Button>
         </div>
       </div>
     </div>
   );
+};
+
+Courses.propTypes = {
+  data: PropTypes.object,
 };
 
 export default Courses;

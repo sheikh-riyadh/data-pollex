@@ -4,12 +4,14 @@ import Input from "../../components/common/Input";
 import SubmitButton from "../../components/common/SubmitButton";
 import { useLazyLoginQuery } from "../../store/services/auth/authApi";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { smoothScroll } from "../../utils/smoothScroll";
 
 const Login = () => {
   const { handleSubmit, register } = useForm({});
   const [loginUser, { isLoading }] = useLazyLoginQuery();
   const navigate = useNavigate();
+  smoothScroll();
 
   /* Here we login the user */
   const handleLogin = async (data) => {
@@ -33,15 +35,17 @@ const Login = () => {
   return (
     <div className="h-svh">
       <div className="flex flex-col  items-center justify-center h-screen w-full container">
-        <div className="flex flex-col items-center justify-center bg-card border shadow-lg rounded-xl overflow-hidden w-[340px] h-[340px]">
+        <div className="flex flex-col items-center justify-center bg-card border border-border-primary shadow-lg rounded-xl overflow-hidden w-[360px] h-[360px]">
           <form
             onSubmit={handleSubmit(handleLogin)}
-            className="flex flex-col items-center justify-center gap-5 w-full p-7"
+            className="flex flex-col justify-center gap-4 w-full p-7"
           >
-            <div className="w-16 h-16 border p-2 rounded-full flex flex-col items-center justify-center bg-red-600 text-white">
-              <FaUserAlt className="text-4xl" />
+            <div className="flex flex-col items-center justify-center">
+              <div className="w-16 h-16 border p-2 rounded-full flex flex-col items-center justify-center bg-red-600 text-white">
+                <FaUserAlt className="text-4xl" />
+              </div>
+              <h1 className="font-bold text-3xl capitalize">Login</h1>
             </div>
-            <h1 className="font-bold text-3xl capitalize">Login</h1>
             <div className="w-full flex flex-col gap-5">
               <Input
                 {...register("email")}
@@ -56,6 +60,15 @@ const Login = () => {
                 type="password"
                 required
               />
+            </div>
+
+            <div className="text-start text-xs">
+              <span className="flex items-center gap-1">
+                New here?
+                <Link to="/register" className="underline">
+                  Register
+                </Link>
+              </span>
             </div>
 
             <SubmitButton isLoading={isLoading}>Sign In</SubmitButton>

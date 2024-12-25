@@ -1,9 +1,9 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
-import { reviews } from "../../../../data/reviews";
 import quate from "../../../../assets/drop-red-bc80918e.svg";
+import PropTypes from "prop-types";
 
-const Reviews = () => {
+const Reviews = ({data}) => {
   return (
     <div className="py-8 md:py-28 container">
       <div className="pb-8 md:pb-16 text-center flex flex-col gap-5 text-primary">
@@ -48,7 +48,7 @@ const Reviews = () => {
         className="mySwiper"
       >
         <div>
-          {reviews?.map(({ name, designation, reviewMessage }) => (
+          {data?.reviews?.map(({ name, designation, reviewMessage }) => (
             <SwiperSlide key={name}>
               <div className="flex flex-col gap-5 border border-border-primary p-5 rounded-md h-full bg-card text-primary">
                 <img className="w-8" src={quate} alt="drop_red" />
@@ -70,4 +70,8 @@ const Reviews = () => {
   );
 };
 
+
+Reviews.propTypes={
+  data:PropTypes.object
+}
 export default Reviews;

@@ -13,7 +13,7 @@ const RegisterCard = () => {
               </h2>
             </div>
           </div>
-          <Link to={"/sign-up"}>
+          <Link to={"/register"}>
             <Button className="px-10 py-4">Sign up now</Button>
           </Link>
         </div>

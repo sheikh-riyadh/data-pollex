@@ -34,6 +34,16 @@
   color: rgba(var(--copy-secondary));
 }
 
+/* Custom bar css */
+
+.custom-bar::-webkit-scrollbar-thumb {
+  background: #cacaca;
+  border-radius: 10px;
+}
+.custom-bar::-webkit-scrollbar {
+  width: 10px;
+}
+
 .clip-rhombus {
   clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 }

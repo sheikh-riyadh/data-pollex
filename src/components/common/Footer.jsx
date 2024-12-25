@@ -41,6 +41,16 @@ const Footer = () => {
       <div className="container">
         <div className="flex flex-col gap-5">
           <div className="flex flex-col md:flex-row md:items-center  md:justify-between gap-5">
+            <div className="flex flex-col lg:items-center gap-5">
+              <img className="w-16" src="/logo.svg" alt="logo" />
+              <div className="flex lg:items-center lg:justify-center gap-5 text-2xl text-primary">
+                {links?.map(({ link, icon }) => (
+                  <a target="_blank" href={link} key={link}>
+                    {icon}
+                  </a>
+                ))}
+              </div>
+            </div>
             <div>
               <h2 className="text-lg font-bold underline text-primary">
                 Site Links
@@ -60,16 +70,7 @@ const Footer = () => {
                 </a>
               </div>
             </div>
-            <div className="flex flex-col lg:items-center gap-5">
-              <img className="w-16" src="/logo.svg" alt="logo" />
-              <div className="flex lg:items-center lg:justify-center gap-5 text-2xl text-primary">
-                {links?.map(({ link, icon }) => (
-                  <a target="_blank" href={link} key={link}>
-                    {icon}
-                  </a>
-                ))}
-              </div>
-            </div>
+
             <div>
               <h2 className="text-lg font-bold underline text-primary">
                 Contact

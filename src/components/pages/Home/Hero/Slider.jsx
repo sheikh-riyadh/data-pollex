@@ -5,11 +5,11 @@ import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 import Button from "../../../common/Button";
 import PropTypes from "prop-types";
 
-const Slider = ({ setActiveSlide }) => {
+const Slider = ({ setActiveSlide,data }) => {
   const swiperRef = useRef();
 
   return (
-    <div className="relative bg-[linear-gradient(180deg,rgba(150,96,20,0.40)_0%,rgba(59,37,6,0.40)_100%)] h-[300px] rounded-3xl p-10 border border-[#64523D]">
+    <div className="relative bg-[linear-gradient(180deg,rgba(150,96,20,0.40)_0%,rgba(59,37,6,0.40)_100%)] h-[350px] rounded-3xl p-10 border border-[#64523D]">
       <div className="flex flex-col items-center pb-4 text-xl font-medium text-white capitalize text-center">
         <h2>We provide many types of courses</h2>
       </div>
@@ -29,11 +29,11 @@ const Slider = ({ setActiveSlide }) => {
             spaceBetween: 10,
           },
           768: {
-            slidesPerView: 4,
+            slidesPerView: 2,
             spaceBetween: 10,
           },
           1024: {
-            slidesPerView: 4,
+            slidesPerView: 2,
             spaceBetween: 10,
           },
         }}
@@ -41,28 +41,32 @@ const Slider = ({ setActiveSlide }) => {
           swiperRef.current = swiper;
         }}
         autoplay={{
-          delay: 2500,
+          delay: 4000,
           disableOnInteraction: false,
         }}
-        onSlideChange={(swiper) => setActiveSlide(swiper.activeIndex + 1)}
+        onSlideChange={(swiper) => setActiveSlide(swiper.activeIndex)}
         pagination={{
           clickable: true,
         }}
         spaceBetween={15}
-        slidesPerView={4}
+        slidesPerView={2}
         freeMode={true}
         modules={[Autoplay]}
         className="mySwiper"
       >
-        {[...Array(20).keys()].map((singleReview) => (
-          <SwiperSlide key={singleReview}>
-            <div className="bg-white/10 flex flex-col items-center justify-center text-white h-36 rounded-md">
-              <h1>{singleReview}</h1>
+        {data?.hero?.map((course, index) => (
+          <SwiperSlide key={index}>
+            <div className="bg-white/10 flex flex-col items-center justify-center text-white h-52 rounded-md">
+              <img
+                className="w-full h-full rounded-md"
+                src={course?.image}
+                alt="course"
+              />
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="absolute bottom-5 right-5 px-5">
+      <div className="absolute bottom-5 right-5 px-5 hidden md:block">
         <div className="flex justify-between gap-5">
           <Button
             className="p-1 bg-[#583112] rounded-md"
@@ -84,5 +88,6 @@ const Slider = ({ setActiveSlide }) => {
 
 Slider.propTypes = {
   setActiveSlide: PropTypes.func,
+  data:PropTypes.object
 };
 export default Slider;

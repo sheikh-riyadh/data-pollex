@@ -11,7 +11,7 @@ const Input = forwardRef(
       if (changeType === "text") {
         setChangeType("password");
       } else {
-        setChangeType(type);
+        setChangeType("text");
       }
     };
 

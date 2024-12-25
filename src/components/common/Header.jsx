@@ -9,8 +9,31 @@ import Button from "./Button";
 import Input from "./Input";
 import { header } from "../../data/header";
 import { Link } from "react-router";
+import { useState } from "react";
+import GlobalSearch from "../pages/Header/GlobalSearch";
+import { useGetDataQuery } from "../../store/services/home/homeApi";
 
 const Header = () => {
+  const [inputValue, setInputValue] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { data: courses, isLoading } = useGetDataQuery();
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+    if (value.length) {
+      setIsModalOpen(true);
+    } else {
+      setIsModalOpen(false);
+    }
+  };
+  const results = courses?.[0]?.hero?.filter(
+    (course) =>
+      course.courseName.toLowerCase().includes(inputValue) ||
+      course.authorName.toLowerCase().includes(inputValue)
+  );
+
   return (
     <header className="w-full bg-card sticky top-0 p-3.5 z-30 border-b border-border-primary">
       <nav>
@@ -35,9 +58,23 @@ const Header = () => {
                 educa
               </span>
             </Link>
-            <div className="flex items-center bg-background px-4 text-primary rounded-full py-1.5">
-              <Input className="bg-transparent p-0" />
+            <div className="flex items-center bg-background px-4 text-primary rounded-full py-1.5 relative">
+              <Input
+                onChange={(e) => handleChange(e)}
+                onFocus={(e) => handleChange(e)}
+                placeholder="Search..."
+                className="bg-transparent p-0"
+              />
               <FaSearch />
+
+              {isModalOpen && (
+                <GlobalSearch
+                  isLoading={isLoading}
+                  isModalOpen={isModalOpen}
+                  setIsModalOpen={setIsModalOpen}
+                  data={results}
+                />
+              )}
             </div>
           </div>
           <div className="col-span-6">
@@ -185,11 +222,11 @@ const Header = () => {
                 <FaPhoneAlt />
                 <span>16910</span>
               </div>
-              <div>
+              <Link to="login">
                 <Button className="px-5 py-1 text-sm font-medium rounded-md">
                   Login
                 </Button>
-              </div>
+              </Link>
             </div>
           </div>
         </div>

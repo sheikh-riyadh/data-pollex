@@ -2,9 +2,10 @@ import { useState } from "react";
 import bg_hero from "../../../../assets/bg-hero.jpeg";
 import Slider from "./Slider";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import PropTypes from "prop-types";
 
-const Hero = () => {
-  const [activeSlide, setActiveSlide] = useState(1);
+const Hero = ({ data }) => {
+  const [activeSlide, setActiveSlide] = useState(0);
 
   return (
     <section
@@ -15,32 +16,46 @@ const Hero = () => {
     >
       <div className="flex flex-col gap-10 xl:gap-20 container">
         <div className="flex flex-col gap-5 items-center h-full  z-20 pt-14">
-          <h1 className="font-bold text-xl xl:text-5xl uppercase text-transparent bg-clip-text bg-gradient-to-r from-white to-red-600">Study with experts</h1>
+          <h1 className="font-bold text-xl xl:text-5xl uppercase text-transparent bg-clip-text bg-gradient-to-r from-white to-red-600">
+            Study with experts
+          </h1>
 
           <div className="w-full grid lg:grid-cols-2 gap-10 pt-10">
-            <div className="relative bg-[linear-gradient(180deg,rgba(19,57,146,0.40)_0%,rgba(6,14,83,0.40)_100%)] rounded-[34px] border border-[#253A71] flex flex-col items-center justify-center">
-              <div className="flex flex-col items-center pb-4 text-xl font-medium text-white capitalize">
-                <h2 className="text-center pt-10 xl:p-0">
-                  Enroll now in courses for Batch 2025!
-                </h2>
-              </div>
+            <div
+              className="relative bg-[linear-gradient(180deg,rgba(19,57,146,0.40)_0%,rgba(6,14,83,0.40)_100%)] rounded-3xl h-[350px] border border-[#253A71] flex flex-col items-center justify-center"
+              style={{
+                background: `url(${data?.hero?.[activeSlide]?.image}) center/cover no-repeat`,
+              }}
+            >
               <div className="absolute -top-5 left-1/2 -translate-x-1/2 flex">
                 <span className="bg-[#15275D] text-[#2B72FF] border border-[#2B72FF] px-5 py-1 rounded-full">
                   Course Overview
                 </span>
               </div>
-              <div className="flex flex-col items-center justify-center text-white w-full h-44 text-9xl rounded-md font-bold">
-                <h1>{activeSlide}</h1>
+              <div className="flex flex-col justify-center bg-black/70 h-full w-full rounded-3xl p-10">
+                <div className="py-2">
+                  <img
+                    className="w-16 h-16 border bg-white"
+                    src={data?.hero?.[activeSlide]?.authorImage}
+                    alt=""
+                  />
+                </div>
+                <span className="text-white font-bold text-xl">
+                  {data?.hero?.[activeSlide]?.courseName}
+                </span>
+                <span className="text-white">
+                  {data?.hero?.[activeSlide]?.description}
+                </span>
               </div>
             </div>
             <div className="w-full hidden lg:block">
-              <Slider setActiveSlide={setActiveSlide} />
+              <Slider setActiveSlide={setActiveSlide} data={data} />
             </div>
           </div>
         </div>
 
         <div className="w-full block lg:hidden">
-          <Slider setActiveSlide={setActiveSlide} />
+          <Slider setActiveSlide={setActiveSlide} data={data}/>
         </div>
 
         <div className="relative bg-[linear-gradient(180deg,rgba(123,21,21,0.40)_0%,rgba(59,6,6,0.40)_100%)] rounded-3xl border border-[#592327] text-center p-5">
@@ -80,4 +95,7 @@ const Hero = () => {
   );
 };
 
+Hero.propTypes = {
+  data: PropTypes.object,
+};
 export default Hero;

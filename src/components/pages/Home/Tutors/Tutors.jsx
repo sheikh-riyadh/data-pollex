@@ -1,10 +1,10 @@
-import person from "../../../../assets/pd-person.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import { useRef } from "react";
 import Button from "../../../common/Button";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
-const Tutors = () => {
+import PropTypes from "prop-types";
+const Tutors = ({ data }) => {
   const swiperRef = useRef();
   return (
     <div className="container">
@@ -54,20 +54,20 @@ const Tutors = () => {
             modules={[Autoplay]}
             className="mySwiper"
           >
-            {[...Array(20).keys()].map((course) => (
-              <SwiperSlide key={course}>
+            {data?.hero?.map((course) => (
+              <SwiperSlide key={course?.courseName}>
                 <div
-                  key={course}
+                  key={course?.courseName}
                   className="bg-card p-3 rounded-md border border-border-primary"
                 >
                   <img
                     className="rounded-md w-full h-52"
-                    src={person}
+                    src={course?.authorImage}
                     alt="course"
                   />
                   <div className="text-primary py-3">
-                    <h2 className="font-medium text-xl">Basic Marketing</h2>
-                    <p className="text-secondary">Web designer</p>
+                    <h2 className="font-medium text-xl">{course?.authorName}</h2>
+                    <p className="text-secondary">{course?.authorDesignation}</p>
                   </div>
                 </div>
               </SwiperSlide>
@@ -95,5 +95,7 @@ const Tutors = () => {
     </div>
   );
 };
-
+Tutors.propTypes = {
+  data: PropTypes.object,
+};
 export default Tutors;
